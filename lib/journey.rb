@@ -3,35 +3,34 @@ class Journey
 
   attr_reader :entry_station, :exit_station
 
- def initialize (entry_station)
-   @entry_station = entry_station
-  @exit_station
-#   @journeys = {}
-  @complete = false
- end
-
-
-# def start(station)
-#   @entry_station = station
-#   @journeys[:entry_station]=station
-    # @complete = false
-# end
+  def initialize (entry_station)
+    @entry_station = entry_station
+    @exit_station
+    @journeys = {}
+    @complete = false
+  end
+  def start(station)
+    @entry_station = station
+    @journeys[:entry_station]=station
+    @complete = false
+  end
   def finish(station)
     #@entry_station = nil
-    @exit_station=station
+    @exit_station = station
     self
-    #@journeys[:exit_station]=station
-    #@complete=true
+    @journeys[:exit_station]=station
+    @complete=true
   end
-
-
 
   def complete?
-     @complete
+    @complete
   end
   def fare
-    PENALTY_FARE if @entry_station== nil || @exit_station== nil
+    if (@journeys.include? :entry_station) && (@journeys.include? :exit_station)
     1
+  else
+    return PENALTY_FARE
+  end
   end
   private
   def caculate_penalty?

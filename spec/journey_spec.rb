@@ -1,7 +1,7 @@
 require 'journey'
 describe Journey do
   let(:station_initialize_with_arg) {Journey.new(station)}
-  let(:station) { double :station}
+  let(:station) { double :station, zone: 1}
   let(:other_station) {double :other_station}
   it 'know when a journey is not complete' do
     expect(station_initialize_with_arg).not_to be_complete
@@ -21,6 +21,8 @@ describe Journey do
       expect(station_initialize_with_arg.fare).to eq Journey::PENALTY_FARE
     end
     it 'calculates a fare' do
+
       expect(station_initialize_with_arg.fare).to eq 1
     end
+    
   end
