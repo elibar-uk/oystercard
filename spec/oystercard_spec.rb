@@ -66,17 +66,4 @@ describe Oystercard do
 		end
 	end
 
-	context "after one journey" do
-		before {oyster.top_up(Oystercard::MIN_FARE)}
-		before {oyster.touch_in station}
-		before {oyster.touch_out station2}
-
-		describe '#journeys' do
-			it 'shows entry and exit stations' do
-					expect(oyster.journeys).to include journey
-			end
-
-		end
-
-	end
 end

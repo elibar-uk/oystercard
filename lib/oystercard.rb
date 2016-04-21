@@ -18,11 +18,13 @@ class Oystercard
 	def touch_in station
     fail "Not enough credit" unless enough_credit?
     @journey[:entry_station] = station
+    #@journey = Journey.new(station)
 	end
 
 	def touch_out station
+    #@journey.finish(exit)
     @journey[:exit_station] = station
-    @journeys << @journey
+    @journeys << @journey #.current_journey
     @journey = {}
     deduct MIN_FARE
 	end

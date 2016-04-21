@@ -6,6 +6,7 @@ describe Journey do
   let(:exit_station) {double :exit_station }
   let(:min_fare) { described_class::MINIMUM_FARE }
   let(:max_fare) { described_class::MAXIMUM_FARE }
+  let(:current_journey) {{entry_station: entry_station, exit_station: exit_station}}
 
   it "has an entry station" do
     expect(journey.entry_station).to eq entry_station
@@ -35,6 +36,16 @@ describe Journey do
     end
   end
 
+  context "after one journey" do
+    before {journey.finish(exit_station)}
 
+    describe '#journeys' do
+      it 'shows entry and exit stations' do
+        expect(journey.current_journey).to include current_journey
+      end
+
+    end
+
+  end
 
 end
