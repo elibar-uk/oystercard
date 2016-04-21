@@ -5,12 +5,12 @@ class Journey
   MINIMUM_FARE = 1
   MAXIMUM_FARE = 6
 
-  def initialize(station)
-    @entry_station = station
+  def initialize(*station)
+    @entry_station = station[0]
   end
 
-  def finish(station)
-    @exit_station = station
+  def finish(*station)
+    @exit_station = station[0]
   end
 
   def fare
