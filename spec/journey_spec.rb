@@ -8,14 +8,6 @@ describe Journey do
   let(:max_fare) { described_class::MAXIMUM_FARE }
   let(:current_journey) {{entry_station: entry_station, exit_station: exit_station}}
 
-  it "has an entry station" do
-    expect(journey.entry_station).to eq entry_station
-  end
-
-  it "has an exit station" do
-    journey.finish(exit_station)
-    expect(journey.exit_station).to eq exit_station
-  end
 
   context 'when finishing journey' do
     context 'on an incomplete journey' do
@@ -43,9 +35,6 @@ describe Journey do
       it 'shows entry and exit stations' do
         expect(journey.current_journey).to include current_journey
       end
-
     end
-
   end
-
 end

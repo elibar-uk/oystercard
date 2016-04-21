@@ -1,3 +1,4 @@
+require_relative 'journey'
 class Oystercard
 
 	MAX_BALANCE = 90
@@ -8,25 +9,19 @@ class Oystercard
 	def initialize
 		@balance = 0
     @journeys = []
-    @journey = {}
+    @journey
 	end
 
-	def in_journey?
-		!@journey.empty?
-  end
 
 	def touch_in station
     fail "Not enough credit" unless enough_credit?
-    @journey[:entry_station] = station
-    #@journey = Journey.new(station)
+    @journey = Journey.new(station)
 	end
 
-	def touch_out station
-    #@journey.finish(exit)
-    @journey[:exit_station] = station
-    @journeys << @journey #.current_journey
-    @journey = {}
-    deduct MIN_FARE
+	def touch_out exit_station
+    @journey.finish(exit_station)
+    @journeys << @journey.current_journey
+    deduct
 	end
 
 	def top_up amount
@@ -35,13 +30,12 @@ class Oystercard
 	end
 
   private
-  attr_reader :in_journey
   def exceeded_max? amount
     (balance + amount) > MAX_BALANCE
   end
 
-  def deduct fare
-    @balance -= fare
+  def deduct
+    @balance -= @journey.fare
   end
 
   def enough_credit?
