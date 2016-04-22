@@ -1,20 +1,23 @@
 require_relative 'journey'
+require_relative 'journeylog'
 class Oystercard
 
 	MAX_BALANCE = 90
   MIN_FARE = 1
 
-	attr_reader :balance, :entry_station, :exit_station, :journeys
+	attr_reader :balance, :journeys
 
 	def initialize
 		@balance = 0
     @journeys = []
     @journey
+		#@journeys = JourneyLog.new
 	end
 
 
 	def touch_in station
     fail "Not enough credit" unless enough_credit?
+		#jou
     @journey = Journey.new(station)
 	end
 
