@@ -9,7 +9,7 @@ describe Journey do
   let(:current_journey) {{entry_station: entry_station, exit_station: exit_station}}
 
 
-  context 'when finishing journey' do
+  context 'when ending journey' do
     context 'on an incomplete journey' do
       it 'charges a maximum fare' do
         expect(journey.fare).to be max_fare
@@ -17,7 +17,7 @@ describe Journey do
     end
 
     context 'on a complete journey' do
-      before { journey.finish(exit_station) }
+      before { journey.end(exit_station) }
         it "it is set to complete" do
           expect(journey).to be_complete
         end
@@ -29,7 +29,7 @@ describe Journey do
   end
 
   context "after one journey" do
-    before {journey.finish(exit_station)}
+    before {journey.end(exit_station)}
 
     describe '#journeys' do
       it 'shows entry and exit stations' do

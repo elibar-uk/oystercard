@@ -1,6 +1,5 @@
 class Journey
 
-
   MINIMUM_FARE = 1
   MAXIMUM_FARE = 6
 
@@ -8,7 +7,7 @@ class Journey
     @entry_station = station[0]
   end
 
-  def finish(*station)
+  def end(*station)
     @exit_station = station[0]
   end
 
