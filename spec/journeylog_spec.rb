@@ -29,7 +29,7 @@ describe JourneyLog do
       allow(journey).to receive(:end).and_return exit_station
       subject.start(entry_station)
       subject.finish(exit_station)
-      expect(subject.journey_history).to include journey
+      expect(subject.journeys).to include journey
     end
     it "sets current journey to nil after it is recorded" do
       allow(journey).to receive(:end).and_return exit_station
@@ -38,8 +38,4 @@ describe JourneyLog do
       expect(subject.current_journey).to eq nil
     end
   end
-
-  # describe '#journeys' do
-  #   expect(subject.journeys).to eq
-  # end
 end
