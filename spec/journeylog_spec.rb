@@ -4,8 +4,10 @@ describe JourneyLog do
   let(:journey_class) { double(:journey_class, new: journey) }
   let(:entry_station) {double :entry_station }
   let(:exit_station) {double :exit_station }
-  let(:current_journey) {{entry_station: entry_station, exit_station: exit_station}}
+  let(:station){ double :station }
   let(:journey) { double(:journey) }
+
+  subject {described_class.new(journey_class)}
 
   it { expect(subject).to respond_to(:start).with(1).argument }
 
@@ -15,18 +17,29 @@ describe JourneyLog do
     end
   end
 
-  # describe '#start' do
-  #   it 'starts a new journey' do
-  #     expect(journey_class).to receive(:new).with(entry_station: entry_station)
-  #   end
-  # end
-
-  describe '#finish' do
-    it 'add the current_journey to the journey_history' do
-      subject.start(entry_station)
-      subject.finish(exit_station)
-      expect(subject.journey_history).to include current_journey
+  describe '#start' do
+    it 'starts a new journey' do
+      expect(journey_class).to receive(:new).with(station)
+      subject.start(station)
     end
   end
 
+  describe '#finish' do
+    it 'add the current_journey to the journey_history' do
+      allow(journey).to receive(:end).and_return exit_station
+      subject.start(entry_station)
+      subject.finish(exit_station)
+      expect(subject.journey_history).to include journey
+    end
+    it "sets current journey to nil after it is recorded" do
+      allow(journey).to receive(:end).and_return exit_station
+      subject.start(entry_station)
+      subject.finish(exit_station)
+      expect(subject.current_journey).to eq nil
+    end
+  end
+
+  # describe '#journeys' do
+  #   expect(subject.journeys).to eq
+  # end
 end

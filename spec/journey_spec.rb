@@ -31,10 +31,10 @@ describe Journey do
   context "after one journey" do
     before {journey.end(exit_station)}
 
-    describe '#journeys' do
-      it 'shows entry and exit stations' do
-        expect(journey.current_journey).to include current_journey
-      end
-    end
+    # describe '#journeys' do
+    #   it 'shows entry and exit stations' do
+    #     expect(journey.current_journey).to include current_journey
+    #   end
+    # end
   end
 end
